@@ -1,0 +1,38 @@
+### Arquivo para testar a API sem o aplicativo.
+### No VS Code, instale a extensão "REST Client" e clique em "Send Request".
+### (Também dá para copiar as requisições para o Postman ou Insomnia.)
+
+@url = http://localhost:3000/api
+
+### Listar todas as ocorrências
+GET {{url}}/ocorrencias
+
+### Cadastrar (use dados de imagem base64 válidos para testar a análise por IA)
+POST {{url}}/ocorrencias
+Content-Type: application/json
+
+{
+  "titulo": "Buraco na Rua Central",
+  "categoria": "Buraco",
+  "descricao": "Buraco próximo à faixa de pedestres",
+  "fotos": ["data:image/jpeg;base64,TESTE"],
+  "latitude": -8.0476,
+  "longitude": -34.877
+}
+
+### Buscar uma ocorrência (troque COLE_O_ID pelo _id devolvido no cadastro)
+GET {{url}}/ocorrencias/COLE_O_ID
+
+### Editar
+PUT {{url}}/ocorrencias/COLE_O_ID
+Content-Type: application/json
+
+{
+  "descricao": "Buraco profundo, próximo à faixa de pedestres"
+}
+
+### Remover
+DELETE {{url}}/ocorrencias/COLE_O_ID
+
+### Analisar as fotos e sugerir providências com a IA
+POST {{url}}/ia/analise/COLE_O_ID
